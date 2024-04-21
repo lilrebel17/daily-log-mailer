@@ -72,14 +72,43 @@ print(f"SENDING Address: {FROM_ADDRESS}")
 print(f"SENDING Address Password: {FROM_ADDRESS_PASSWORD}")
 CONFIRMATION = input('Are the setting above correct? [Y/n]: ')
 
-print("Testing login..")
-if SMTP_SSL == True:
-    SMTP_SERVER = smtplib.SMTP_SSL(SMTP_HOSTNAME,SMTP_PORT)
-else:
-    SMTP_SERVER = smtplib.SMTP(SMTP_HOSTNAME,SMTP_PORT)
+if CONFIRMATION == 'N' or CONFIRMATION == 'n':
+    exit()
+elif CONFIRMATION == 'Y' or CONFIRMATION == 'y':
+    print("Testing login..")
+    if SMTP_SSL == True:
+        SMTP_SERVER = smtplib.SMTP_SSL(SMTP_HOSTNAME,SMTP_PORT)
+    else:
+        SMTP_SERVER = smtplib.SMTP(SMTP_HOSTNAME,SMTP_PORT)
 
-try:
-    CONNECTION_TEST = SMTP_SERVER.login(FROM_ADDRESS,FROM_ADDRESS_PASSWORD)
-    print(CONNECTION_TEST)
-except smtplib.SMTPAuthenticationError as e:
-    print(e)
+    try:
+        CONNECTION_TEST = SMTP_SERVER.login(FROM_ADDRESS,FROM_ADDRESS_PASSWORD)
+        print(CONNECTION_TEST)
+
+    except smtplib.SMTPAuthenticationError as e:
+        print(e)
+
+    WORKING_DIRECTORY: str = '/etc/pyeasymailer/'
+
+    try:
+        os.mkdir(WORKING_DIRECTORY)
+    except FileExistsError as e:
+        pass
+
+    CONFIG = configparser.ConfigParser()
+
+    CONFIG.add_section("SMTP")
+    CONFIG['SMTP']['HOSTNAME'] = SMTP_HOSTNAME
+    CONFIG['SMTP']['PORT'] = str(SMTP_PORT)
+    CONFIG.add_section('CREDENTIALS')
+    CONFIG['CREDENTIALS']['USERNAME'] = FROM_ADDRESS
+    CONFIG['CREDENTIALS']['PASSWORD'] = FROM_ADDRESS_PASSWORD
+
+    CONFIG_FILE_NAME = 'default_settings.conf'
+    try:
+        with open(f'{WORKING_DIRECTORY}/{CONFIG_FILE_NAME}','w') as CONFIG_FILE:
+            CONFIG.write(CONFIG_FILE)
+
+            print(f"{CONFIG_FILE_NAME} was created at {WORKING_DIRECTORY}")
+    except Exception as e:
+        print(e)
