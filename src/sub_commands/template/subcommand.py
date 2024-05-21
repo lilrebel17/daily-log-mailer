@@ -13,15 +13,16 @@ class TemplateSubCommand(SubCommand):
     def add_subparser(self,subparser:_SubParsersAction):
         parser:ArgumentParser = subparser.add_parser('template',help='Run to edit, create or modify templates')
         parser.add_argument('-b','--body',action='store',help='Run to add/modify the body text of a template',dest='template_body',metavar="")
-        parser.add_argument('-c','--create',action='store_true',help='Runs to create a template file',dest='template_create')
         parser.add_argument('-l','--list',action='store_true',help='Run to list all created templates',dest='template_list')
-        parser.add_argument('-m','--modify',action='store_true',help='Run to choose what template to modify',dest='template_modify')
-        parser.add_argument('-n','--name',action='store',help='Run to select or set the name of a template',dest='template_name',metavar="")
+        parser.add_argument("-n","--name",action='store',help="Run with this to choose a template name",dest="template_name",metavar="",required=True)
         parser.add_argument('-s','--subject',action='store',help='Used to set or modify the subject of a template',dest='template_subject',metavar="")
 
+        group = parser.add_mutually_exclusive_group(required=True)
+        group.add_argument('-m','--modify',action='store_true',help='Run to choose what template to modify',dest='template_modify')
+        group.add_argument('-c','--create',action='store_true',help='Runs to create a template file',dest='template_create')
+
+
     def handle_command(self,namespace: Namespace):
-        if namespace.template_name == None:
-            raise ValueError("No template name was provided. Please use -n [name] to provide a name argument.")
         if namespace.template_create:
             self.handle_create(namespace.template_name,namespace.template_subject,namespace.template_body)
         elif namespace.template_modify:
