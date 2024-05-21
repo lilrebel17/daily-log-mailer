@@ -4,8 +4,9 @@
 import argparse
 from os import getuid
 
+# Module Imports
 from sub_commands.setup import subcommand as setup
-
+from sub_commands.template import subcommand as template
 
 
 # Main argument parser
@@ -19,10 +20,9 @@ sub_parser = main_parser.add_subparsers(dest='subcommand')
 setup_subcommand = setup.SetupSubCommand()
 setup_subcommand.add_subparser(sub_parser)
 
-# Init the config subcommand
-config_subcommand = sub_parser.add_parser(name='config',help='Run to setup certain configurable options within pyeasymailer')
-config_subcommand.add_argument('-lt','--list-templates',action='store_true',help='Lists all current template names',dest='list_templates')
-
+# Init the template subcommand.
+template_subcommand = template.TemplateSubCommand()
+template_subcommand.add_subparser(sub_parser)
 
 
 if __name__ == '__main__':
@@ -37,7 +37,7 @@ if __name__ == '__main__':
     match args.subcommand:
         case 'setup':
             setup_subcommand.handle_command(args)
-        case 'config':
-            print("WIP: Config Subcommand")
+        case 'template':
+            template_subcommand.handle_command(args)
 
         
