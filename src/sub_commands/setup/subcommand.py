@@ -12,7 +12,6 @@ class SetupSubCommand(SubCommand):
         parser.add_argument('-i', '--interactive', action='store_true',help='Runs the interactive setup', dest='interactive')
 
     def handle_command(self,namespace: argparse.Namespace):
-        if namespace.interactive:
             if namespace.is_root:
                 run_interactive_setup(namespace)
             else:

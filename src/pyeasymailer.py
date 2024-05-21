@@ -7,6 +7,7 @@ from os import getuid
 # Module Imports
 from sub_commands.setup import subcommand as setup
 from sub_commands.template import subcommand as template
+from sub_commands.send import subcommand as send
 
 
 # Main argument parser
@@ -25,6 +26,9 @@ setup_subcommand.add_subparser(sub_parser)
 template_subcommand = template.TemplateSubCommand()
 template_subcommand.add_subparser(sub_parser)
 
+# Init the send subcommand.
+send_subcommand = send.SendSubCommand()
+send_subcommand.add_subparser(sub_parser)
 
 if __name__ == '__main__':
     args = main_parser.parse_args()
@@ -41,6 +45,6 @@ if __name__ == '__main__':
         case 'template':
             template_subcommand.handle_command(args)
         case 'send':
-            print('WIP: SEND')
+            send_subcommand.handle_command(args)
 
         

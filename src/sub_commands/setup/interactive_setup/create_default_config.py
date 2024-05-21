@@ -2,7 +2,7 @@ import configparser
 
 def create_default_config(smtp_hostname:str,smtp_port:str,from_address:str,from_address_password:str):
     config = configparser.ConfigParser()
-    config_file_name = 'default_settings.conf'
+    config_file_name = 'smtp.conf'
     template_directory = '/etc/pyeasymailer/'
 
     config.add_section("smtp")
