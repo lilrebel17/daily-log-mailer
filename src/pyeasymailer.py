@@ -13,7 +13,7 @@ from sub_commands.send import subcommand as send
 # Main argument parser
 main_parser = argparse.ArgumentParser(prog='pyeasymailer',description='Quickly setup and send emails using a remote SMTP like gmail or ZoHo')
 main_parser.add_argument("-v",'--verbose',help='Run to get more information while the program executes. Enables verbose logging for one run',action='store_true',dest='verbose')
-main_parser.add_argument("-n","--name",help="Run with this to choose a template name",metavar="",dest="template_name")
+main_parser.add_argument("-n","--name",help="Run to select a template name",metavar="",dest="template_name")
 
 # Sub Parser for any subcommands to work under
 sub_parser = main_parser.add_subparsers(dest='subcommand')
