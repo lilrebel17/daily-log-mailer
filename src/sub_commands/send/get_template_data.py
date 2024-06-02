@@ -9,6 +9,10 @@ def get_template_data(template_name:str):
         name = template.get('name')
         subject = template.get('subject')
         body = template.get('body')
+        attachment = template.get('attachment')
 
-        return {'name': name, 'subject': subject, 'body':body}
+        if attachment:
+            return {'name': name, 'subject': subject, 'body':body, 'attachment':attachment}
+        else:
+            return {'name': name, 'subject': subject, 'body':body}
         

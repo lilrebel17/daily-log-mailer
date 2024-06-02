@@ -44,7 +44,8 @@ pyeasymailer send -n [template_name]
     # This would create a new template with the name "Hello".
     # The body would just say "Hello!"
     # The subject would be "A hello from me"
-    pyeasymailer template -c -n Hello -b "Hello!" -s "A hello from me"
+    # It attach a file with the name test.txt to your email with the contents of /home/you/test.txt
+    pyeasymailer template -c -n Hello -b "Hello!" -s "A hello from me" -a '/home/you/test.txt'
     ```
 - Arguments
   - Required Flags (Must have at least one)
@@ -55,6 +56,7 @@ pyeasymailer send -n [template_name]
     - -b or --body to set the body of a template
     - -s or --subject to set the subject of a template
     - -n or --name to set the name of a template.
+    - -a or --attachment to set the filepath to an attachment you want to send
 
 #### Send Subcommand
 - Allows you to send one of your templates to a specified email address
