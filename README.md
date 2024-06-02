@@ -1,6 +1,6 @@
 # PyEasyMailer
 
-PyEasyMailer is a command line tool to send email templates from a linux server using a remote SMTP such as Zoho, GMail, or Rackspace. 
+PyEasyMailer is a command line tool to send email templates from a linux server using a remote SMTP such as Zoho or GMail. 
 
 ## Installation
 
@@ -69,7 +69,7 @@ pyeasymailer send -n [template_name]
 
 ## Contributing
 
-Contributions are welcome! If you'd like to contribute to [Project Name], please follow these steps:
+Contributions are welcome! If you'd like to contribute to PyEasyMailer, please follow these steps:
 
 1. Fork the repository.
 2. Create a new branch (`git checkout -b feature-branch`).
